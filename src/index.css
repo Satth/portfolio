@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+/* ─── Design Tokens ─────────────────────────────────────────────── */
+:root {
+  --color-bg: #F4F4F0;
+  --color-text: #111111;
+  --color-text-muted: #111111aa;
+  --color-border: rgba(17, 17, 17, 0.15);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-circ: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* ─── Base Reset ────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  cursor: none;
+  overflow-x: hidden;
+}
+
+/* ─── Custom Cursor ─────────────────────────────────────────────── */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background: var(--color-text);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s ease;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--color-text);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s var(--ease-out-expo), height 0.4s var(--ease-out-expo), background 0.3s ease, border-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cursor-ring.expanded {
+  width: 88px;
+  height: 88px;
+  background: var(--color-text);
+  border-color: var(--color-text);
+}
+
+.cursor-ring .cursor-label {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-bg);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.cursor-ring.expanded .cursor-label {
+  opacity: 1;
+}
+
+/* ─── Typography ────────────────────────────────────────────────── */
+.font-serif { font-family: var(--font-serif); }
+.font-sans  { font-family: var(--font-sans); }
+
+/* ─── Text Mask Reveal ──────────────────────────────────────────── */
+.text-mask-wrap {
+  overflow: hidden;
+  display: block;
+}
+
+/* ─── Section Divider ───────────────────────────────────────────── */
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--color-border);
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: rgba(17,17,17,0.25); border-radius: 3px; }
+
+/* ─── Selection ─────────────────────────────────────────────────── */
+::selection {
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+/* ─── Image Hover Effect ────────────────────────────────────────── */
+.img-hover-zoom {
+  overflow: hidden;
+}
+.img-hover-zoom img {
+  transition: transform 0.9s var(--ease-in-out-circ);
+  transform: scale(1);
+}
+.img-hover-zoom:hover img {
+  transform: scale(1.05);
+}
+
+/* ─── Floating Project Image ────────────────────────────────────── */
+.project-float-img {
+  position: fixed;
+  pointer-events: none;
+  z-index: 100;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+/* ─── Horizontal Line Items ─────────────────────────────────────── */
+.line-item {
+  border-top: 1px solid var(--color-border);
+  transition: border-color 0.3s ease;
+}
+.line-item:last-child {
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ─── Noise Texture Overlay ─────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9997;
+  opacity: 0.4;
+}
