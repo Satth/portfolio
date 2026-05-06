@@ -1,13 +1,19 @@
 import { motion } from 'framer-motion';
 import TextReveal from './TextReveal';
 import { expertise } from '../data/projects';
+import { useBreakpoint } from '../hooks/useBreakpoint';
 
 export default function Expertise() {
+  const { isMobile, isTablet } = useBreakpoint();
+  const sectionPx = isMobile ? '20px' : isTablet ? '32px' : '48px';
+  const sectionPy = isMobile ? '80px' : isTablet ? '100px' : '140px';
+  const isSingleCol = isMobile || isTablet;
+
   return (
     <section
       id="expertise"
       style={{
-        padding: '140px 48px',
+        padding: `${sectionPy} ${sectionPx}`,
         borderTop: '1px solid var(--color-border)',
       }}
     >
@@ -20,17 +26,19 @@ export default function Expertise() {
         textTransform: 'uppercase',
         color: 'var(--color-text-muted)',
         display: 'block',
-        marginBottom: '80px',
+        marginBottom: isMobile ? '48px' : '80px',
       }}>
-        03 / Expertise & Education
+        06 / Expertise &amp; Education
       </span>
 
       {/* Heading */}
-      <div style={{ marginBottom: '100px' }}>
+      <div style={{ marginBottom: isMobile ? '56px' : '100px' }}>
         <TextReveal duration={1.1}>
           <h2 style={{
             fontFamily: 'var(--font-serif)',
-            fontSize: 'clamp(48px, 7vw, 110px)',
+            fontSize: isMobile
+              ? 'clamp(40px, 12vw, 72px)'
+              : 'clamp(48px, 7vw, 110px)',
             fontWeight: 300,
             lineHeight: 0.92,
             letterSpacing: '-0.03em',
@@ -43,7 +51,9 @@ export default function Expertise() {
           <h2 style={{
             fontFamily: 'var(--font-serif)',
             fontStyle: 'italic',
-            fontSize: 'clamp(48px, 7vw, 110px)',
+            fontSize: isMobile
+              ? 'clamp(40px, 12vw, 72px)'
+              : 'clamp(48px, 7vw, 110px)',
             fontWeight: 300,
             lineHeight: 0.92,
             letterSpacing: '-0.03em',
@@ -54,11 +64,11 @@ export default function Expertise() {
         </TextReveal>
       </div>
 
-      {/* Two-column table layout */}
+      {/* Two-column table layout — 1 col em mobile/tablet */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        gap: '80px',
+        gridTemplateColumns: isSingleCol ? '1fr' : '1fr 1fr',
+        gap: isMobile ? '48px' : isTablet ? '40px' : '80px',
         alignItems: 'start',
       }}>
         {expertise.map((group, gi) => (
@@ -87,9 +97,9 @@ export default function Expertise() {
                   className="line-item expertise-row"
                   style={{
                     display: 'grid',
-                    gridTemplateColumns: '52px 1fr',
-                    gap: '24px',
-                    padding: '20px 0',
+                    gridTemplateColumns: isMobile ? '40px 1fr' : '52px 1fr',
+                    gap: isMobile ? '16px' : '24px',
+                    padding: isMobile ? '16px 0' : '20px 0',
                     alignItems: 'baseline',
                   }}
                 >
@@ -105,7 +115,9 @@ export default function Expertise() {
                   <div>
                     <p style={{
                       fontFamily: 'var(--font-serif)',
-                      fontSize: 'clamp(16px, 1.8vw, 22px)',
+                      fontSize: isMobile
+                        ? 'clamp(15px, 4vw, 20px)'
+                        : 'clamp(16px, 1.8vw, 22px)',
                       fontWeight: 400,
                       lineHeight: 1.3,
                       color: 'var(--color-text)',

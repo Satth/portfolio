@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
+import { useBreakpoint } from '../hooks/useBreakpoint';
 
 /**
  * Reusable lightbox overlay.
@@ -9,6 +10,8 @@ import { AnimatePresence, motion } from 'framer-motion';
  *   onClose  — function to close
  */
 export default function Lightbox({ src, alt, isOpen, onClose }) {
+  const { isMobile, isTouch } = useBreakpoint();
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -17,9 +20,11 @@ export default function Lightbox({ src, alt, isOpen, onClose }) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.35, ease: 'easeOut' }}
-          // Clicking ANYWHERE on the overlay (including the image) closes it
           onClick={onClose}
           data-cursor="Close"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Visualização ampliada"
           style={{
             position: 'fixed',
             inset: 0,
@@ -28,8 +33,8 @@ export default function Lightbox({ src, alt, isOpen, onClose }) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '40px',
-            cursor: 'none',
+            padding: isMobile ? '16px' : '40px',
+            cursor: isTouch ? 'pointer' : 'none',
           }}
         >
           {/* Close hint */}
@@ -39,8 +44,8 @@ export default function Lightbox({ src, alt, isOpen, onClose }) {
             transition={{ delay: 0.25, duration: 0.35 }}
             style={{
               position: 'absolute',
-              top: '32px',
-              right: '48px',
+              top: isMobile ? '20px' : '32px',
+              right: isMobile ? '20px' : '48px',
               fontFamily: 'var(--font-sans)',
               fontSize: '10px',
               fontWeight: 400,
@@ -50,22 +55,22 @@ export default function Lightbox({ src, alt, isOpen, onClose }) {
               pointerEvents: 'none',
             }}
           >
-            Click anywhere to close
+            {isTouch ? 'Toque para fechar' : 'Click anywhere to close'}
           </motion.span>
 
-          {/* Expanded image — note: NO stopPropagation so click bubbles to overlay */}
+          {/* Expanded image */}
           <motion.div
             initial={{ scale: 0.88, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.93, opacity: 0 }}
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              maxWidth: '82vw',
-              maxHeight: '86vh',
+              maxWidth: isMobile ? '95vw' : '82vw',
+              maxHeight: isMobile ? '80vh' : '86vh',
               overflow: 'hidden',
               borderRadius: '2px',
               boxShadow: '0 40px 120px rgba(0,0,0,0.6)',
-              pointerEvents: 'none', // let clicks pass through to overlay
+              pointerEvents: 'none',
             }}
           >
             <img
@@ -76,7 +81,7 @@ export default function Lightbox({ src, alt, isOpen, onClose }) {
                 width: '100%',
                 height: '100%',
                 objectFit: 'contain',
-                maxHeight: '86vh',
+                maxHeight: isMobile ? '80vh' : '86vh',
                 userSelect: 'none',
                 pointerEvents: 'none',
               }}

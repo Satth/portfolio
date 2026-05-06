@@ -1,7 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useSpring } from 'framer-motion';
 
+/**
+ * CustomCursor — renderizado apenas em dispositivos que suportam
+ * hover com mouse (hover: hover AND pointer: fine).
+ * Em touch/mobile, o componente não monta nada.
+ */
 export default function CustomCursor() {
+  // Detecta se o dispositivo suporta hover real (mouse)
+  const [hasHover] = useState(() =>
+    typeof window !== 'undefined'
+      ? window.matchMedia('(hover: hover) and (pointer: fine)').matches
+      : false
+  );
+
   const [position, setPosition] = useState({ x: -100, y: -100 });
   const [isExpanded, setIsExpanded] = useState(false);
   const [label, setLabel] = useState('View');
@@ -12,6 +24,8 @@ export default function CustomCursor() {
   const ringY = useSpring(-100, springConfig);
 
   useEffect(() => {
+    if (!hasHover) return;
+
     const handleMouseMove = (e) => {
       const x = e.clientX;
       const y = e.clientY;
@@ -45,7 +59,10 @@ export default function CustomCursor() {
       document.documentElement.removeEventListener('mouseleave', handleMouseLeave);
       document.documentElement.removeEventListener('mouseenter', handleMouseEnter);
     };
-  }, [isVisible, ringX, ringY]);
+  }, [hasHover, isVisible, ringX, ringY]);
+
+  // Não renderiza nada em dispositivos touch
+  if (!hasHover) return null;
 
   return (
     <>

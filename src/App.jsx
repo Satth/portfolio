@@ -4,14 +4,38 @@ import { motion } from 'framer-motion';
 import CustomCursor from './components/CustomCursor';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import Marquee from './components/Marquee';
 import Works from './components/Works';
 import About from './components/About';
+import Philosophy from './components/Philosophy';
+import Interests from './components/Interests';
 import Expertise from './components/Expertise';
 import Footer from './components/Footer';
+import ThemeToggle from './components/ThemeToggle';
+import AudioPlayer from './components/AudioPlayer';
 import './index.css';
 
+const MARQUEE_ITEMS_A = [
+  'Creative Developer',
+  'Systems Analysis',
+  'Caruaru, PE',
+  'UI / UX Design',
+  'Art Direction',
+  'Porto Digital',
+  'Open to Work',
+];
+
+const MARQUEE_ITEMS_B = [
+  'React & Next.js',
+  'Framer Motion',
+  'Design Systems',
+  'Interactive Experiences',
+  'SENAC Certified',
+  'i.d.e.i.a.S.',
+  'Northeastern Brazil',
+];
+
 export default function App() {
-  // Initialize Lenis smooth scroll
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.3,
@@ -27,7 +51,6 @@ export default function App() {
     }
 
     requestAnimationFrame(raf);
-
     return () => lenis.destroy();
   }, []);
 
@@ -55,13 +78,27 @@ export default function App() {
         }}
       />
 
+      {/* Fixed UI elements */}
       <CustomCursor />
+      <ThemeToggle />
+      <AudioPlayer />
+
       <Navbar />
 
       <main>
         <Hero />
+
+        {/* Kinetic marquee — between Hero and Works */}
+        <Marquee items={MARQUEE_ITEMS_A} speed={40} />
+
         <Works />
         <About />
+
+        {/* Reverse marquee — between About and Philosophy */}
+        <Marquee items={MARQUEE_ITEMS_B} speed={50} reverse />
+
+        <Philosophy />
+        <Interests />
         <Expertise />
         <Footer />
       </main>

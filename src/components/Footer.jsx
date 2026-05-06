@@ -1,14 +1,20 @@
 import { motion } from 'framer-motion';
 import TextReveal from './TextReveal';
+import { ExternalLink } from 'lucide-react';
+import { useBreakpoint } from '../hooks/useBreakpoint';
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const { isMobile, isTablet, isTouch } = useBreakpoint();
+  const sectionPx = isMobile ? '20px' : isTablet ? '32px' : '48px';
+  const paddingTop = isMobile ? '80px' : isTablet ? '100px' : '120px';
+  const paddingBottom = isMobile ? '48px' : '56px';
 
   return (
     <footer
       id="contact"
       style={{
-        padding: '120px 48px 56px',
+        padding: `${paddingTop} ${sectionPx} ${paddingBottom}`,
         borderTop: '1px solid var(--color-border)',
         position: 'relative',
         overflow: 'hidden',
@@ -23,30 +29,34 @@ export default function Footer() {
         textTransform: 'uppercase',
         color: 'var(--color-text-muted)',
         display: 'block',
-        marginBottom: '64px',
+        marginBottom: isMobile ? '40px' : '64px',
       }}>
-        04 / Contact
+        07 / Contact
       </span>
 
       {/* Large CTA heading */}
-      <div style={{ marginBottom: '80px' }}>
+      <div style={{ marginBottom: isMobile ? '48px' : '80px' }}>
         <TextReveal duration={1.2}>
           <h2 style={{
             fontFamily: 'var(--font-serif)',
-            fontSize: 'clamp(56px, 9vw, 150px)',
+            fontSize: isMobile
+              ? 'clamp(48px, 14vw, 80px)'
+              : 'clamp(56px, 9vw, 150px)',
             fontWeight: 300,
             lineHeight: 0.9,
             letterSpacing: '-0.03em',
             color: 'var(--color-text)',
           }}>
-            Let's Work
+            Let&apos;s Work
           </h2>
         </TextReveal>
         <TextReveal duration={1.2} delay={0.12}>
           <h2 style={{
             fontFamily: 'var(--font-serif)',
             fontStyle: 'italic',
-            fontSize: 'clamp(56px, 9vw, 150px)',
+            fontSize: isMobile
+              ? 'clamp(48px, 14vw, 80px)'
+              : 'clamp(56px, 9vw, 150px)',
             fontWeight: 300,
             lineHeight: 0.9,
             letterSpacing: '-0.03em',
@@ -63,14 +73,16 @@ export default function Footer() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.3 }}
-        style={{ marginBottom: '100px' }}
+        style={{ marginBottom: isMobile ? '56px' : '100px' }}
       >
         <a
-          href="mailto:hello@alexmercer.dev"
+          href="mailto:hello@eduardo.dev"
           data-cursor="Mail"
           style={{
             fontFamily: 'var(--font-sans)',
-            fontSize: 'clamp(14px, 1.8vw, 22px)',
+            fontSize: isMobile
+              ? 'clamp(13px, 4vw, 18px)'
+              : 'clamp(14px, 1.8vw, 22px)',
             fontWeight: 300,
             letterSpacing: '0.04em',
             color: 'var(--color-text)',
@@ -79,12 +91,59 @@ export default function Footer() {
             paddingBottom: '4px',
             borderBottom: '1px solid var(--color-text)',
             transition: 'opacity 0.3s ease',
+            cursor: isTouch ? 'pointer' : 'none',
           }}
-          onMouseEnter={(e) => e.currentTarget.style.opacity = '0.5'}
-          onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+          onMouseEnter={(e) => !isTouch && (e.currentTarget.style.opacity = '0.5')}
+          onMouseLeave={(e) => !isTouch && (e.currentTarget.style.opacity = '1')}
         >
           hello@eduardo.dev
         </a>
+      </motion.div>
+
+      {/* SDG Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        style={{ marginBottom: isMobile ? '48px' : '72px' }}
+      >
+        <span style={{
+          fontFamily: 'var(--font-sans)',
+          fontSize: '9px',
+          fontWeight: 400,
+          letterSpacing: '0.2em',
+          textTransform: 'uppercase',
+          color: 'var(--color-text-muted)',
+          display: 'block',
+          marginBottom: '16px',
+        }}>
+          Aligned with the UN Sustainable Development Goals
+        </span>
+        <div className="sdg-row">
+          {[
+            { n: '4',  label: 'Quality Education',           color: '#C5192D', href: 'https://sdgs.un.org/goals/goal4'  },
+            { n: '8',  label: 'Decent Work & Growth',        color: '#A21942', href: 'https://sdgs.un.org/goals/goal8'  },
+            { n: '9',  label: 'Industry & Innovation',       color: '#FD6925', href: 'https://sdgs.un.org/goals/goal9'  },
+            { n: '17', label: 'Partnerships for the Goals',  color: '#19486A', href: 'https://sdgs.un.org/goals/goal17' },
+          ].map((sdg) => (
+            <a
+              key={sdg.n}
+              href={sdg.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sdg-badge"
+              aria-label={`SDG ${sdg.n}: ${sdg.label}`}
+              style={{ cursor: isTouch ? 'pointer' : 'none' }}
+              data-cursor="Go"
+            >
+              <span className="sdg-circle" style={{ background: sdg.color }}>
+                {sdg.n}
+              </span>
+              <span className="sdg-label">{sdg.label}</span>
+            </a>
+          ))}
+        </div>
       </motion.div>
 
       {/* Bottom row */}
@@ -96,11 +155,12 @@ export default function Footer() {
         style={{
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'flex-end',
+          alignItems: isMobile ? 'flex-start' : 'flex-end',
           borderTop: '1px solid var(--color-border)',
           paddingTop: '32px',
-          flexWrap: 'wrap',
-          gap: '24px',
+          flexDirection: isMobile ? 'column' : 'row',
+          flexWrap: isMobile ? 'nowrap' : 'wrap',
+          gap: isMobile ? '32px' : '24px',
         }}
       >
         {/* Copyright */}
@@ -115,7 +175,11 @@ export default function Footer() {
         </span>
 
         {/* Socials */}
-        <div style={{ display: 'flex', gap: '40px' }}>
+        <div style={{
+          display: 'flex',
+          gap: isMobile ? '24px' : '40px',
+          flexWrap: 'wrap',
+        }}>
           {[
             { label: 'GitHub', href: 'https://github.com' },
             { label: 'LinkedIn', href: 'https://linkedin.com' },
@@ -137,9 +201,10 @@ export default function Footer() {
                 color: 'var(--color-text-muted)',
                 textDecoration: 'none',
                 transition: 'color 0.3s ease',
+                cursor: isTouch ? 'pointer' : 'none',
               }}
-              onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-text)'}
-              onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-muted)'}
+              onMouseEnter={(e) => !isTouch && (e.currentTarget.style.color = 'var(--color-text)')}
+              onMouseLeave={(e) => !isTouch && (e.currentTarget.style.color = 'var(--color-text-muted)')}
             >
               {link.label}
             </a>
@@ -160,15 +225,21 @@ export default function Footer() {
             letterSpacing: '0.15em',
             textTransform: 'uppercase',
             color: 'var(--color-text)',
-            cursor: 'none',
+            cursor: isTouch ? 'pointer' : 'none',
             transition: 'background 0.3s ease, color 0.3s ease',
             borderRadius: '1px',
+            alignSelf: isMobile ? 'flex-start' : 'auto',
+            // Área de toque mínima de 44px para acessibilidade
+            minHeight: '44px',
+            minWidth: isMobile ? '140px' : 'auto',
           }}
           onMouseEnter={(e) => {
+            if (isTouch) return;
             e.currentTarget.style.background = 'var(--color-text)';
             e.currentTarget.style.color = 'var(--color-bg)';
           }}
           onMouseLeave={(e) => {
+            if (isTouch) return;
             e.currentTarget.style.background = 'none';
             e.currentTarget.style.color = 'var(--color-text)';
           }}
