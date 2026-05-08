@@ -153,7 +153,7 @@ export default function Hero() {
             className="img-hover-zoom"
           >
             <motion.img
-              src="src/assets/me.jpg"
+              src="public/1778186434749~3.png"
               alt="Eduardo Henrique"
               style={{
                 width: '100%',
@@ -258,7 +258,7 @@ export default function Hero() {
         </section>
 
         <Lightbox
-          src="src/assets/me.jpg"
+          src="public/1778186434749~3.png"
           alt="Eduardo Henrique"
           isOpen={lightboxOpen}
           onClose={() => setLightboxOpen(false)}
@@ -375,7 +375,7 @@ export default function Hero() {
           className="img-hover-zoom"
         >
           <motion.img
-            src="src/assets/me.jpg"
+            src="public/1778186434749~3.png"
             alt="Eduardo Henrique"
             style={{
               width: '100%',
@@ -455,7 +455,7 @@ export default function Hero() {
       </section>
 
       <Lightbox
-        src="src/assets/me.jpg"
+        src="public/1778186434749~3.png"
         alt="Eduardo Henrique"
         isOpen={lightboxOpen}
         onClose={() => setLightboxOpen(false)}

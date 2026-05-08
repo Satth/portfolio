@@ -98,7 +98,7 @@ export default function About() {
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
               data-cursor="View"
-              onClick={() => setLightboxSrc('src/assets/artnamao.png')}
+              onClick={() => setLightboxSrc('public\IMG-20251215-WA0023~2.jpg')}
               style={{
                 marginTop: isMobile ? '40px' : '64px',
                 overflow: 'hidden',
@@ -110,7 +110,7 @@ export default function About() {
               className="img-hover-zoom"
             >
               <img
-                src="src/assets/artnamao.png"
+                src="public\IMG-20251215-WA0023~2.jpg"
                 alt="Abstract workspace"
                 style={{ width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none' }}
               />

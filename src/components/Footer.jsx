@@ -76,7 +76,7 @@ export default function Footer() {
         style={{ marginBottom: isMobile ? '56px' : '100px' }}
       >
         <a
-          href="mailto:hello@eduardo.dev"
+          href="mailto:henriqueeduardo682@hotmail.com"
           data-cursor="Mail"
           style={{
             fontFamily: 'var(--font-sans)',
@@ -96,7 +96,7 @@ export default function Footer() {
           onMouseEnter={(e) => !isTouch && (e.currentTarget.style.opacity = '0.5')}
           onMouseLeave={(e) => !isTouch && (e.currentTarget.style.opacity = '1')}
         >
-          hello@eduardo.dev
+          henriqueeduardo682@hotmail.com
         </a>
       </motion.div>
 
@@ -122,10 +122,10 @@ export default function Footer() {
         </span>
         <div className="sdg-row">
           {[
-            { n: '4',  label: 'Quality Education',           color: '#C5192D', href: 'https://sdgs.un.org/goals/goal4'  },
-            { n: '8',  label: 'Decent Work & Growth',        color: '#A21942', href: 'https://sdgs.un.org/goals/goal8'  },
-            { n: '9',  label: 'Industry & Innovation',       color: '#FD6925', href: 'https://sdgs.un.org/goals/goal9'  },
-            { n: '17', label: 'Partnerships for the Goals',  color: '#19486A', href: 'https://sdgs.un.org/goals/goal17' },
+            { n: '4', label: 'Quality Education', color: '#C5192D', href: 'https://sdgs.un.org/goals/goal4' },
+            { n: '8', label: 'Decent Work & Growth', color: '#A21942', href: 'https://sdgs.un.org/goals/goal8' },
+            { n: '9', label: 'Industry & Innovation', color: '#FD6925', href: 'https://sdgs.un.org/goals/goal9' },
+            { n: '17', label: 'Partnerships for the Goals', color: '#19486A', href: 'https://sdgs.un.org/goals/goal17' },
           ].map((sdg) => (
             <a
               key={sdg.n}
@@ -181,8 +181,8 @@ export default function Footer() {
           flexWrap: 'wrap',
         }}>
           {[
-            { label: 'GitHub', href: 'https://github.com' },
-            { label: 'LinkedIn', href: 'https://linkedin.com' },
+            { label: 'GitHub', href: 'https://github.com/Satth' },
+            { label: 'LinkedIn', href: 'https://www.linkedin.com/in/eduardo-henrique-a52468254/' },
             { label: 'Twitter / X', href: 'https://x.com' },
             { label: 'Read.cv', href: 'https://read.cv' },
           ].map((link) => (

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { X, Play } from 'lucide-react';
 import { useBreakpoint } from '../hooks/useBreakpoint';
@@ -6,6 +6,8 @@ import { useBreakpoint } from '../hooks/useBreakpoint';
 export default function VideoModal({ isOpen, onClose }) {
   const videoRef = useRef(null);
   const { isMobile } = useBreakpoint();
+  const [videoError, setVideoError] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   // Pause on close, play on open
   useEffect(() => {
@@ -102,40 +104,48 @@ export default function VideoModal({ isOpen, onClose }) {
           >
             <video
               ref={videoRef}
-              src="src/assets/showreel.mp4"
+              src="public/videoapresentacao.mp4"
               controls
-              muted
               playsInline
-              style={{ width: '100%', height: '100%', display: 'block', objectFit: 'cover' }}
-              onError={() => { }}
-            >
-              {/* Fallback for missing file */}
-            </video>
-
-            {/* Placeholder shown if video fails to load */}
-            <div
-              id="video-placeholder"
               style={{
-                position: 'absolute',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '16px',
-                color: 'rgba(240,237,230,0.3)',
-                pointerEvents: 'none',
+                width: '100%',
+                height: '100%',
+                display: 'block',
+                objectFit: 'contain',
+                background: '#000',
               }}
-            >
-              <Play size={48} strokeWidth={1} />
-              <span style={{
-                fontFamily: 'var(--font-sans)',
-                fontSize: '10px',
-                letterSpacing: '0.2em',
-                textTransform: 'uppercase',
-              }}>
-                Introduction Video coming soon
-              </span>
-            </div>
+              onLoadedData={() => setVideoLoaded(true)}
+              onError={() => setVideoError(true)}
+            />
+
+            {/* Placeholder — only shown if video fails to load */}
+            {videoError && (
+              <div
+                id="video-placeholder"
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '16px',
+                  color: 'rgba(240,237,230,0.3)',
+                  pointerEvents: 'none',
+                  background: '#0B0B0B',
+                }}
+              >
+                <Play size={48} strokeWidth={1} />
+                <span style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '10px',
+                  letterSpacing: '0.2em',
+                  textTransform: 'uppercase',
+                }}>
+                  Video unavailable
+                </span>
+              </div>
+            )}
           </motion.div>
 
           {/* Hint */}
