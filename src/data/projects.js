@@ -5,7 +5,7 @@ export const projects = [
     year: "2025",
     tags: ["HTML5", "CSS3", "JavaScript (ES6+)"],
     description: "O Arte Na Mão é uma plataforma de e-commerce dedicada a valorizar e promover o talento de artistas nordestinos, conectando criadores de arte com apreciadores e colecionadores de todo o Brasil.",
-    image: "public/artnamao.png",
+    image: "./artnamao.png",
     url: "https://github.com/WyldSLA/arte-na-mao",
   },
   {
@@ -23,7 +23,7 @@ export const projects = [
     year: "2026",
     tags: ["In development"],
     description: "Munify is a platform aimed at students who want to maximize their content retention.",
-    image: "public/Pitch Munify.png",
+    image: "./Pitch Munify.png",
     url: "#",
   },
   {

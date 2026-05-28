@@ -2,18 +2,23 @@
 
 /* ─── Design Tokens ─────────────────────────────────────────────── */
 :root {
-  --color-bg: #F4F4F0;
+  --color-bg: #F2EEE8;           /* Warmer paper — more pigment */
   --color-text: #111111;
   --color-text-muted: #111111aa;
-  --color-border: rgba(17, 17, 17, 0.15);
+  --color-border: rgba(17, 17, 17, 0.14);
   --color-accent: #111111;
-  --color-nav-bg: rgba(244, 244, 240, 0.95);
+  --color-nav-bg: rgba(242, 238, 232, 0.95);
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out-circ: cubic-bezier(0.76, 0, 0.24, 1);
   --section-px: clamp(24px, 5vw, 80px);
   --section-py: clamp(80px, 10vw, 160px);
+  --color-accent-art: #C4441C;
+  /* Watercolor wash layers */
+  --wc-warm:   rgba(196, 68,  28, 0.06);
+  --wc-amber:  rgba(200, 160, 60, 0.07);
+  --wc-rose:   rgba(180, 100, 80, 0.05);
 }
 
 /* ─── Vivid Theme (Dark) ─────────────────────────────────────── */
@@ -67,6 +72,23 @@ body {
 
 @media (hover: hover) and (pointer: fine) {
   body { cursor: none; }
+}
+
+@media (max-width: 1024px), (pointer: coarse) {
+  :root, html[data-theme="vivid"] {
+    --color-bg: #F2EEE8;
+    --color-text: #111111;
+    --color-text-muted: #111111aa;
+    --color-border: rgba(17, 17, 17, 0.15);
+    --color-accent: #111111;
+    --color-nav-bg: rgba(242, 238, 232, 0.95);
+  }
+  body { cursor: auto !important; }
+  .img-hover-zoom { transform: none !important; }
+  .project-float-img { display: none !important; }
+  .marquee-track { animation-duration: 35s !important; }
+  /* Hide decorative blobs and grain on mobile */
+  .wc-blob, .grain-layer { display: none !important; }
 }
 
 /* ─── Custom Cursor ─────────────────────────────────────────────── */
@@ -169,16 +191,7 @@ body {
 .line-item { border-top: 1px solid var(--color-border); transition: border-color 0.3s ease; }
 .line-item:last-child { border-bottom: 1px solid var(--color-border); }
 
-/* ─── Noise Texture Overlay ─────────────────────────────────────── */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 9997;
-  opacity: 0.4;
-}
+/* body::before grain removed — handled by GrainOverlay.jsx */
 
 /* ─── Restore cursor on touch/mobile ────────────────────────────── */
 @media (hover: none) {
@@ -279,13 +292,6 @@ body::before {
 .theme-toggle-btn.active {
   background: var(--color-text);
   color: var(--color-bg);
-}
-
-@media (max-width: 767px) {
-  .theme-toggle {
-    bottom: 100px;
-    left: 20px;
-  }
 }
 
 /* ─── Showreel Button ───────────────────────────────────────────── */

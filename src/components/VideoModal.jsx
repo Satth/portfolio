@@ -104,7 +104,7 @@ export default function VideoModal({ isOpen, onClose }) {
           >
             <video
               ref={videoRef}
-              src="public/videoapresentacao.mp4"
+              src="./videoapresentacao.mp4"
               controls
               playsInline
               style={{

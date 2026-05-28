@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Play, Pause, Volume2, ChevronUp } from 'lucide-react';
 
 const TRACK_TITLE = 'Ambient Study Mix';
-const AUDIO_SRC   = 'src/assets/audio.mp3';
+const AUDIO_SRC   = './audio.mp3';
 
 function fmt(s) {
   if (!isFinite(s)) return '0:00';

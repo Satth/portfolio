@@ -4,6 +4,7 @@ import { Play } from 'lucide-react';
 import TextReveal from './TextReveal';
 import Lightbox from './Lightbox';
 import VideoModal from './VideoModal';
+import WatercolorBlob from './WatercolorBlob';
 import { useBreakpoint } from '../hooks/useBreakpoint';
 
 export default function Hero() {
@@ -153,7 +154,7 @@ export default function Hero() {
             className="img-hover-zoom"
           >
             <motion.img
-              src="public/1778186434749~3.png"
+              src="./1778186434749~3.png"
               alt="Eduardo Henrique"
               style={{
                 width: '100%',
@@ -258,7 +259,7 @@ export default function Hero() {
         </section>
 
         <Lightbox
-          src="public/1778186434749~3.png"
+          src="./1778186434749~3.png"
           alt="Eduardo Henrique"
           isOpen={lightboxOpen}
           onClose={() => setLightboxOpen(false)}
@@ -375,7 +376,7 @@ export default function Hero() {
           className="img-hover-zoom"
         >
           <motion.img
-            src="public/1778186434749~3.png"
+            src="./1778186434749~3.png"
             alt="Eduardo Henrique"
             style={{
               width: '100%',
@@ -392,6 +393,24 @@ export default function Hero() {
             background: 'linear-gradient(to bottom, transparent 60%, rgba(17,17,17,0.08) 100%)',
           }} />
         </motion.div>
+
+        {/* Watercolor blob — warm accent behind image (desktop only) */}
+        <div style={{
+          position: 'absolute',
+          top: '-40px',
+          right: '40px',
+          pointerEvents: 'none',
+          zIndex: 1,
+        }}>
+          <WatercolorBlob
+            color="rgba(196, 68, 28, 0.10)"
+            size={420}
+            top={0}
+            left={0}
+            opacity={0.18}
+            blur={110}
+          />
+        </div>
 
         {/* Showreel button — floats near image */}
         <motion.div
@@ -455,7 +474,7 @@ export default function Hero() {
       </section>
 
       <Lightbox
-        src="public/1778186434749~3.png"
+        src="./1778186434749~3.png"
         alt="Eduardo Henrique"
         isOpen={lightboxOpen}
         onClose={() => setLightboxOpen(false)}

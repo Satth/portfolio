@@ -5,6 +5,7 @@ import { useBreakpoint } from '../hooks/useBreakpoint';
 const navLinks = [
   { label: 'Work',    href: '#work'       },
   { label: 'About',   href: '#about'      },
+  { label: 'Journey', href: '#journey'    },
   { label: 'Process', href: '#philosophy' },
   { label: 'Contact', href: '#contact'    },
 ];

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Download } from 'lucide-react';
+
 import TextReveal from './TextReveal';
 import Lightbox from './Lightbox';
 import { useBreakpoint } from '../hooks/useBreakpoint';
@@ -98,7 +98,7 @@ export default function About() {
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
               data-cursor="View"
-              onClick={() => setLightboxSrc('public\IMG-20251215-WA0023~2.jpg')}
+              onClick={() => setLightboxSrc('./IMG-20251215-WA0023~2.jpg')}
               style={{
                 marginTop: isMobile ? '40px' : '64px',
                 overflow: 'hidden',
@@ -110,7 +110,7 @@ export default function About() {
               className="img-hover-zoom"
             >
               <img
-                src="public\IMG-20251215-WA0023~2.jpg"
+                src="./IMG-20251215-WA0023~2.jpg"
                 alt="Abstract workspace"
                 style={{ width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none' }}
               />
@@ -195,34 +195,7 @@ export default function About() {
               </motion.div>
             ))}
 
-            {/* CV Download */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.8 }}
-              style={{ marginTop: '40px' }}
-            >
-              <a
-                href="/cv.pdf"
-                download
-                className="cv-download-btn"
-                aria-label="Download CV as PDF"
-                style={{ cursor: isTouch ? 'pointer' : 'none' }}
-              >
-                <Download size={14} strokeWidth={1.5} />
-                Download CV
-              </a>
-              <p style={{
-                fontFamily: 'var(--font-sans)',
-                fontSize: '9px',
-                letterSpacing: '0.1em',
-                color: 'var(--color-text-muted)',
-                marginTop: '10px',
-              }}>
-                PDF · Updated 2026
-              </p>
-            </motion.div>
+
           </div>
         </div>
       </section>
